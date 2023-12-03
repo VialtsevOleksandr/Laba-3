@@ -1,0 +1,152 @@
+  [
+    {
+      "PersonalInformation": {
+        "FullName": "Іваненко Петро Іванович",
+        "DormitoryNumber": 16,
+        "Floor": 8,
+        "RoomNumber": "804/3",
+        "ContractEndDate": "2024-06-30",
+        "IsResidingInDormitory": "Ні",
+        "AcademicDetails": {
+          "Faculty": "Факультет комп'ютерних наук та кібернетики",
+          "Department": "Математична інформатика",
+          "Course": 4
+        }
+      }
+    },
+    {
+      "PersonalInformation": {
+        "FullName": "Сидоренко Василь Петрович",
+        "DormitoryNumber": 16,
+        "Floor": 6,
+        "RoomNumber": "604/2",
+        "ContractEndDate": "2024-06-30",
+        "IsResidingInDormitory": "Так",
+        "AcademicDetails": {
+          "Faculty": "Факультет комп'ютерних наук та кібернетики",
+          "Department": "Прикладна статистика",
+          "Course": 1
+        }
+      }
+    },
+  {
+    "PersonalInformation": {
+      "FullName": "Коваленко Олександр Сергійович",
+      "DormitoryNumber": 18,
+      "Floor": 5,
+      "RoomNumber": "504/3",
+      "ContractEndDate": "2025-06-30",
+      "IsResidingInDormitory": "Так",
+      "AcademicDetails": {
+        "Faculty": "Інститут журналістики",
+        "Department": "Соціальні комунікації",
+        "Course": 2
+      }
+    }
+  },
+  {
+    "PersonalInformation": {
+      "FullName": "Петренко Марія Іванівна",
+      "DormitoryNumber": 17,
+      "Floor": 7,
+      "RoomNumber": "704/2",
+      "ContractEndDate": "2026-06-30",
+      "IsResidingInDormitory": "Ні",
+      "AcademicDetails": {
+        "Faculty": "Інститут філології",
+        "Department": "Зарубіжна література",
+        "Course": 2
+      }
+    }
+  },
+  {
+    "PersonalInformation": {
+      "FullName": "Шевченко Ірина Володимирівна",
+      "DormitoryNumber": 17,
+      "Floor": 7,
+      "RoomNumber": "704/2",
+      "ContractEndDate": "2025-06-30",
+      "IsResidingInDormitory": "Ні",
+      "AcademicDetails": {
+        "Faculty": "Інститут філології",
+        "Department": "Комунікації і лінгвокраїнознавство",
+        "Course": 3
+      }
+    }
+  },
+  {
+    "PersonalInformation": {
+      "FullName": "Мельник Юрій Петрович",
+      "DormitoryNumber": 14,
+      "Floor": 3,
+      "RoomNumber": "304/3",
+      "ContractEndDate": "2026-06-30",
+      "IsResidingInDormitory": "Так",
+      "AcademicDetails": {
+        "Faculty": "Інститут міжнародних відносин",
+        "Department": "Міжнародні відносини і зовнішня політика",
+        "Course": 2
+      }
+    }
+  },
+  {
+    "PersonalInformation": {
+      "FullName": "Ткаченко Анна Миколаївна",
+      "DormitoryNumber": 1,
+      "Floor": 4,
+      "RoomNumber": "404/2",
+      "ContractEndDate": "2025-06-30",
+      "IsResidingInDormitory": "Ні",
+      "AcademicDetails": {
+        "Faculty": "Факультет радіофізики, електроніки та комп'ютерних систем",
+        "Department": "Електрофізика",
+        "Course": 1
+      }
+    }
+  },
+  {
+    "PersonalInformation": {
+      "FullName": "Павленко Вікторія Ігорівна",
+      "DormitoryNumber": 17,
+      "Floor": 7,
+      "RoomNumber": "704/3",
+      "ContractEndDate": "2025-06-30",
+      "IsResidingInDormitory": "Так",
+      "AcademicDetails": {
+        "Faculty": "Інститут філології",
+        "Department": "Зарубіжна література",
+        "Course": 1
+      }
+    }
+  },
+  {
+    "PersonalInformation": {
+      "FullName": "Бойко Дмитро Васильович",
+      "DormitoryNumber": 18,
+      "Floor": 6,
+      "RoomNumber": "604/3",
+      "ContractEndDate": "2024-06-30",
+      "IsResidingInDormitory": "Ні",
+      "AcademicDetails": {
+        "Faculty": "Інститут журналістики",
+        "Department": "Мови та стилістики",
+        "Course": 3
+      }
+    }
+  },
+  {
+    "PersonalInformation": {
+      "FullName": "Сидоренко Дмитро Петрович",
+      "DormitoryNumber": 16,
+      "Floor": 6,
+      "RoomNumber": "604/2",
+      "ContractEndDate": "2025-06-30",
+      "IsResidingInDormitory": "Так",
+      "AcademicDetails": {
+        "Faculty": "Факультет комп'ютерних наук та кібернетики",
+        "Department": "Прикладна статистика",
+        "Course": 3
+      }
+    }
+  }
+]

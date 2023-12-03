@@ -1,0 +1,98 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Laba_3.MainPage"
+             Title="JSON"
+             Padding="10,5,10,5">
+
+    <ScrollView>
+        <StackLayout x:Name="Main">
+            <Grid Padding="0,0,0,10">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+                <Button Text="Pick file" FontSize="Micro" Grid.Column="0" TextColor="Gray" HorizontalOptions="Start" BackgroundColor="White" Clicked="PickFileButton_Clicked" />
+                <Label x:Name="SelectedFilePathLabel" TextColor="Gray" IsVisible="False" Grid.Column="2" HorizontalTextAlignment="Center" VerticalOptions="Center"/>
+                <Button Text="X" FontSize="Micro" Grid.Column="5" TextColor="Red" HorizontalOptions="End" BackgroundColor="White" Clicked="ExitButton_Clicked"/>
+                <Button Text="About program" FontSize="Micro" Grid.Column="4" TextColor="Gray" HorizontalOptions="End" BackgroundColor="White" Clicked="AboutProgramButton_Clicked" Margin="0,0,5,0" />
+            </Grid>
+            <Grid HorizontalOptions="Center">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="75" />
+                    <ColumnDefinition Width="0.5*" />
+                    <ColumnDefinition Width="25" />
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="60" />
+                    <ColumnDefinition Width="0.5*" />
+                    <ColumnDefinition Width="25" />
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="95" />
+                    <ColumnDefinition Width="0.5*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+
+                <CheckBox x:Name="FullNameBox" CheckedChanged="FullNameBox_CheckedChanged" VerticalOptions="Center" Grid.Column="1">
+                    <CheckBox.Triggers>
+                        <DataTrigger TargetType="CheckBox" Grid.Column="1"  Binding="{Binding IsChecked, Source={x:Reference FullNameBox}}" Value="True">
+                            <Setter Property="Color" Value="LimeGreen" />
+                        </DataTrigger>
+                        <DataTrigger TargetType="CheckBox" Grid.Column="1"  Binding="{Binding IsChecked, Source={x:Reference FullNameBox}}" Value="False">
+                            <Setter Property="Color" Value="Red" />
+                        </DataTrigger>
+                    </CheckBox.Triggers>
+                </CheckBox>
+                <Label x:Name="FullNameLabel" Text="FullName: " Grid.Column="2" VerticalOptions="Center" IsEnabled="False" />
+                <Entry x:Name="FullNameEntry" TextChanged="OnLetterEntryTextChanged" IsEnabled="False" Grid.Column="3"  VerticalOptions="Center" MaxLength="75" MinimumWidthRequest="125" MaximumWidthRequest="125"/>
+
+                <CheckBox x:Name="FacultyBox" CheckedChanged="FacultyBox_CheckedChanged" Grid.Column="5"  VerticalOptions="Center">
+                    <CheckBox.Triggers>
+                        <DataTrigger TargetType="CheckBox" Grid.Column="5"  Binding="{Binding IsChecked, Source={x:Reference FacultyBox}}" Value="True">
+                            <Setter Property="Color" Value="LimeGreen" />
+                        </DataTrigger>
+                        <DataTrigger TargetType="CheckBox" Grid.Column="5"  Binding="{Binding IsChecked, Source={x:Reference FacultyBox}}" Value="False">
+                            <Setter Property="Color" Value="Red" />
+                        </DataTrigger>
+                    </CheckBox.Triggers>
+                </CheckBox>
+                <Label x:Name="FacultyLabel" Text="Faculty: " Grid.Column="6"  VerticalOptions="Center" IsEnabled="False"/>
+                <Picker x:Name="FacultyPicker" IsEnabled="False" Grid.Column="7"  VerticalOptions="Center" FontAutoScalingEnabled="True" MinimumWidthRequest="125"/>
+
+                <CheckBox x:Name="DepartmentBox" CheckedChanged="DepartmentBox_CheckedChanged" Grid.Column="9"  VerticalOptions="Center">
+                    <CheckBox.Triggers>
+                        <DataTrigger TargetType="CheckBox" Grid.Column="9"  Binding="{Binding IsChecked, Source={x:Reference DepartmentBox}}" Value="True">
+                            <Setter Property="Color" Value="LimeGreen" />
+                        </DataTrigger>
+                        <DataTrigger TargetType="CheckBox" Grid.Column="9"  Binding="{Binding IsChecked, Source={x:Reference DepartmentBox}}" Value="False">
+                            <Setter Property="Color" Value="Red" />
+                        </DataTrigger>
+                    </CheckBox.Triggers>
+                </CheckBox>
+                <Label x:Name="DepartmentLabel" Text="Department: " Grid.Column="10"  VerticalOptions="Center" IsEnabled="False"/>
+                <Picker x:Name="DepartmentPicker" IsEnabled="False" Grid.Column="11"  VerticalOptions="Center" FontAutoScalingEnabled="True" MinimumWidthRequest="125"/>
+            </Grid>
+            <Grid Padding="0,10,0,10">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Button Text="Clear" Grid.Column="1" FontFamily="Impact" FontSize="Medium" TextColor="Black" BackgroundColor="Beige" VerticalOptions="Center" Clicked="ClearButton_Clicked" />
+                <Button Text="Search" x:Name="SearchButton" IsEnabled="False" Margin="5,0,5,0" Grid.Column="2" FontFamily="Impact" FontSize="Medium" TextColor="Black" BackgroundColor="Beige" VerticalOptions="Center" Clicked="SearchButton_Clicked"/>
+                <Button Text="Save"  Margin="0,0,5,0" Grid.Column="3" FontFamily="Impact" FontSize="Medium" TextColor="Black" BackgroundColor="Beige" VerticalOptions="Center" Clicked="SaveButton_Clicked"/>
+                <Button Text="Add data" Grid.Column="4" FontFamily="Impact" FontSize="Medium" TextColor="Black" BackgroundColor="Beige" VerticalOptions="Center" Clicked="AddDataButton_Clicked" />
+            </Grid>
+           
+        </StackLayout>
+    </ScrollView>
+
+</ContentPage>
