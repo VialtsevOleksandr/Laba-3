@@ -1,12 +1,10 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="Laba_3.AddData"
-             Title="AddData"
-             Padding="10,5,10,5">
-    
+             x:Class="Laba_3.EditData"
+             Title="EditData">
     <StackLayout>
-        <Label x:Name="Info" Text="Це сторінка де ви можете додавати елементи до таблиці. Якщо ви не введете інформацію до поля, то в ньому з'явиться - або -1 як неможливе значення для int." FontAttributes="Italic" HorizontalOptions="Center" VerticalOptions="Center"/>
+        <Label x:Name="Info" Text="Це сторінка де ви можете редагувати елементи таблиці. Якщо ви не введете інформацію до поля, то в таблиці це поле залишиться без змін." FontAttributes="Italic" HorizontalOptions="Center" VerticalOptions="Center"/>
 
         <Grid Margin="0,10,0,0">
             <Grid.RowDefinitions>
@@ -170,7 +168,7 @@
                 </Picker.Items>
             </Picker>
         </Grid>
-
+        
         <Grid Padding="0,10,0,10">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*" />

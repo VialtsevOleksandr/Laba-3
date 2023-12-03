@@ -10,6 +10,8 @@ public partial class MainPage : ContentPage
     ScrollView GridScrollView = new ScrollView() { Orientation = ScrollOrientation.Horizontal };
     StackLayout GridStackLayout = new StackLayout();
     public List<Dormitories> dormitories = new List<Dormitories>();
+    public List<Dormitories> filteredDormitories = new List<Dormitories>();
+    public int SelectedRowIndex { get; set; }
 
     public MainPage()
     {
@@ -31,7 +33,7 @@ public partial class MainPage : ContentPage
         public string ContractEndDate { get; set; }
         public string IsResidingInDormitory { get; set; }
         public AcademicDetails AcademicDetails { get; set; }
-        public PersonalInformation(string fullName, int dormitoryNumber, int floor, string roomNumber, string contractEndDate, string isResidingInDormitory)
+        public PersonalInformation(string fullName, int dormitoryNumber, int floor, string roomNumber, string contractEndDate, string isResidingInDormitory, AcademicDetails academicDetails)
         {
             FullName = fullName;
             DormitoryNumber = dormitoryNumber;
@@ -39,6 +41,8 @@ public partial class MainPage : ContentPage
             RoomNumber = roomNumber;
             ContractEndDate = contractEndDate;
             IsResidingInDormitory = isResidingInDormitory;
+            AcademicDetails = academicDetails;
+
         }
     }
 
@@ -154,7 +158,6 @@ public partial class MainPage : ContentPage
                 if (fileInfo.Length == 0)
                 {
                     SelectedFilePathLabel.IsVisible = false;
-                    SearchButton_Enable();
                     await DisplayAlert("Помилка", "Обраний файл є порожнім. Будь ласка, оберіть інший файл", "OK");
                     return;
                 }
@@ -164,6 +167,10 @@ public partial class MainPage : ContentPage
                 LoadPicker(FacultyPicker, "Faculty");
                 LoadPicker(DepartmentPicker, "Department");
                 SearchButton_Enable();
+                AddDataButton_Enable();
+                SaveButton_Enable();
+                EditButton_Enable();
+                DeleteButton_Enable();
                 Draw(dormitories);
                 await DisplayAlert($"Ви обрали файл: {result.FileName}", "", "OK");
             }
@@ -181,6 +188,12 @@ public partial class MainPage : ContentPage
     {
         FileStream fs = new FileStream(selectedFilePath, FileMode.Open);
         dormitories = JsonSerializer.Deserialize<List<Dormitories>>(fs);
+        fs.Close();
+    }
+    private void JSONSerialize()
+    {
+        FileStream fs = new FileStream(selectedFilePath, FileMode.Create);
+        JsonSerializer.Serialize(fs, dormitories);
         fs.Close();
     }
     private void Draw(List<Dormitories> dormitoriesall)
@@ -212,24 +225,30 @@ public partial class MainPage : ContentPage
             var academicDetails = personalInformation.AcademicDetails;
 
             grid.RowDefinitions.Add(new RowDefinition { Height = new GridLength(1, GridUnitType.Star) });
+            int rowIndex = i;
             string k = (i+1).ToString();
-            AddLabelToGrid(k, 0, i+1);
-            AddLabelToGrid(personalInformation.FullName, 1, i + 1);
-            AddLabelToGrid(personalInformation.DormitoryNumber.ToString(), 2, i + 1);
-            AddLabelToGrid(personalInformation.Floor.ToString(), 3, i + 1);
-            AddLabelToGrid(personalInformation.RoomNumber, 4, i + 1);
-            AddLabelToGrid(personalInformation.ContractEndDate, 5, i + 1);
-            AddLabelToGrid(personalInformation.IsResidingInDormitory, 6, i + 1);
-            AddLabelToGrid(academicDetails.Faculty, 7, i + 1);
-            AddLabelToGrid(academicDetails.Department, 8, i + 1);
-            AddLabelToGrid(academicDetails.Course.ToString(), 9, i + 1);
+            var tapGestureRecognizer = new TapGestureRecognizer();
+            tapGestureRecognizer.Tapped += (s, e) => {
+                SelectedRowIndex = rowIndex;
+            };
+            AddLabelToGrid(k, 0, i + 1, tapGestureRecognizer);
+            AddLabelToGrid(personalInformation.FullName, 1, i + 1, tapGestureRecognizer);
+            AddLabelToGrid(personalInformation.DormitoryNumber.ToString(), 2, i + 1, tapGestureRecognizer);
+            AddLabelToGrid(personalInformation.Floor.ToString(), 3, i + 1, tapGestureRecognizer);
+            AddLabelToGrid(personalInformation.RoomNumber, 4, i + 1, tapGestureRecognizer);
+            AddLabelToGrid(personalInformation.ContractEndDate, 5, i + 1, tapGestureRecognizer);
+            AddLabelToGrid(personalInformation.IsResidingInDormitory, 6, i + 1, tapGestureRecognizer);
+            AddLabelToGrid(academicDetails.Faculty, 7, i + 1, tapGestureRecognizer);
+            AddLabelToGrid(academicDetails.Department, 8, i + 1, tapGestureRecognizer);
+            AddLabelToGrid(academicDetails.Course.ToString(), 9, i + 1, tapGestureRecognizer);
         }
         GridStackLayout.Children.Add(grid);
         GridScrollView.Content = GridStackLayout;
         Main.Children.Add(GridScrollView);
-        void AddLabelToGrid(string text, int column, int row)
+        void AddLabelToGrid(string text, int column, int row, TapGestureRecognizer tapGestureRecognizer)
         {
             var label = new Label { Text = text, FontSize = 13, BackgroundColor = Colors.White, Margin = new Thickness(1, 1, 1, 1), Padding = new Thickness(5, 5, 5, 5) };
+            label.GestureRecognizers.Add(tapGestureRecognizer);
             grid.Children.Add(label);
             Grid.SetRow(label, row);
             Grid.SetColumn(label, column);
@@ -270,6 +289,50 @@ public partial class MainPage : ContentPage
             SearchButton.IsEnabled = false;
         }
     }
+    private void AddDataButton_Enable()
+    {
+        if (selectedFilePath != string.Empty)
+        {
+            AddDataButton.IsEnabled = true;
+        }
+        else
+        {
+            AddDataButton.IsEnabled = false;
+        }
+    }
+    private void SaveButton_Enable()
+    {
+        if (selectedFilePath != string.Empty)
+        {
+            SaveButton.IsEnabled = true;
+        }
+        else
+        {
+            SaveButton.IsEnabled = false;
+        }
+    }
+    private void EditButton_Enable()
+    {
+        if (selectedFilePath != string.Empty)
+        {
+            EditDataButton.IsEnabled = true;
+        }
+        else
+        {
+            EditDataButton.IsEnabled = false;
+        }
+    }
+    private void DeleteButton_Enable()
+    {
+        if (selectedFilePath != string.Empty)
+        {
+            DeleteDataButton.IsEnabled = true;
+        }
+        else
+        {
+            DeleteDataButton.IsEnabled = false;
+        }
+    }
     private async void SearchButton_Clicked(object sender, EventArgs e)
     {
         try
@@ -295,7 +358,7 @@ public partial class MainPage : ContentPage
     }
     private void Search()
     {
-        var filteredDormitories = dormitories.Where(dormitory =>
+        filteredDormitories = dormitories.Where(dormitory =>
         {
             var personalInformation = dormitory.PersonalInformation;
             var academicDetails = personalInformation.AcademicDetails;
@@ -321,23 +384,120 @@ public partial class MainPage : ContentPage
             Draw(filteredDormitories);
         }
     }
-    private void SaveButton_Clicked(object sender, EventArgs e)
+    private async void SaveButton_Clicked(object sender, EventArgs e)
     {
-
+        try
+        {
+            JSONSerialize();
+            await DisplayAlert("Ви зберігли зміни у файлі:", $"{selectedFilePath}", "OK");
+        }
+        catch (Exception ex)
+        {
+            await DisplayAlert("Помилка", $"Сталася помилка: {ex.Message}", "OK");
+        }
     }
-    private async void AddDataButton_Clicked(object sender, EventArgs e)
+    private void AddDataButton_Clicked(object sender, EventArgs e)
     {
-        await Navigation.PushAsync(new AddData(dormitories));
+        Navigation.PushAsync(new AddData(dormitories));
     }
     protected override void OnAppearing()
     {
         if (selectedFilePath != string.Empty)
         {
-            ClearGrid();
+            Clear();
+            Search();
+            Clear();
             LoadPicker(FacultyPicker, "Faculty");
             LoadPicker(DepartmentPicker, "Department");
-            Draw(dormitories);
+            Draw(dormitories);            
         }
         base.OnAppearing();
+    }
+
+    private async void EditDataButton_Clicked(object sender, EventArgs e)
+    {
+        try
+        {
+            string FullnameEdit = "";
+            if (SelectedRowIndex >= 0 && (SelectedRowIndex < dormitories.Count || SelectedRowIndex < filteredDormitories.Count))
+            {
+                if (filteredDormitories.Any())
+                {
+                    FullnameEdit = filteredDormitories[SelectedRowIndex].PersonalInformation.FullName;
+                }
+                else
+                {
+                    FullnameEdit = dormitories[SelectedRowIndex].PersonalInformation.FullName;
+                }
+                bool answer = await DisplayAlert("Редагування", $"Ви впевнені, що хочете редагувати інформацію про {FullnameEdit}?", "Так", "Ні");
+                if (answer)
+                {
+                    if (filteredDormitories.Any())
+                    {
+                        Dormitories dormitoryToEdit = filteredDormitories[SelectedRowIndex];
+                        await Navigation.PushAsync(new EditData(dormitoryToEdit));
+                    }
+                    else
+                    {
+                        Dormitories dormitoryToEdit = dormitories[SelectedRowIndex];
+                        await Navigation.PushAsync(new EditData(dormitoryToEdit));
+                    }
+                }
+            }
+        }
+        catch (Exception ex)
+        {
+            await DisplayAlert("Помилка", $"Сталася помилка: {ex.Message}", "OK");
+        }
+    }
+    private async void DeleteDataButton_Clicked(object sender, EventArgs e)
+    {
+        try
+        {
+            string FullnameDelete = "";
+            if (SelectedRowIndex >= 0 && (SelectedRowIndex < dormitories.Count || SelectedRowIndex < filteredDormitories.Count))
+            {
+                if (filteredDormitories.Any())
+                {
+                    FullnameDelete = filteredDormitories[SelectedRowIndex].PersonalInformation.FullName;
+                }
+                else
+                {
+                    FullnameDelete = dormitories[SelectedRowIndex].PersonalInformation.FullName;
+                }
+                bool answer = await DisplayAlert("Видалення", $"Ви впевнені, що хочете видалити інформацію про {FullnameDelete}?", "Так", "Ні");
+                if (answer)
+                {
+                    if (filteredDormitories.Any())
+                    {
+                        var itemToRemove = filteredDormitories[SelectedRowIndex];
+                        filteredDormitories.Remove(itemToRemove);
+                        dormitories.Remove(itemToRemove);
+                        Clear();
+                        LoadPicker(FacultyPicker, "Faculty");
+                        LoadPicker(DepartmentPicker, "Department");
+                        if (filteredDormitories.Any())
+                        {
+                            Draw(filteredDormitories);
+                        }
+                    }
+                    else
+                    {
+                        dormitories.RemoveAt(SelectedRowIndex);
+                        Clear();
+                        LoadPicker(FacultyPicker, "Faculty");
+                        LoadPicker(DepartmentPicker, "Department");
+                        if (dormitories.Any())
+                        {
+                            Draw(dormitories);
+                        }
+                    }
+                }
+            }
+        }
+        catch (Exception ex)
+        {
+            await DisplayAlert("Помилка", $"Сталася помилка: {ex.Message}", "OK");
+        }
     }
 }

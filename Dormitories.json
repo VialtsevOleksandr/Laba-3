@@ -1,34 +1,34 @@
-  [
-    {
-      "PersonalInformation": {
-        "FullName": "Іваненко Петро Іванович",
-        "DormitoryNumber": 16,
-        "Floor": 8,
-        "RoomNumber": "804/3",
-        "ContractEndDate": "2024-06-30",
-        "IsResidingInDormitory": "Ні",
-        "AcademicDetails": {
-          "Faculty": "Факультет комп'ютерних наук та кібернетики",
-          "Department": "Математична інформатика",
-          "Course": 4
-        }
+[
+  {
+    "PersonalInformation": {
+      "FullName": "Іваненко Петро Іванович",
+      "DormitoryNumber": 16,
+      "Floor": 8,
+      "RoomNumber": "804/3",
+      "ContractEndDate": "2024-06-30",
+      "IsResidingInDormitory": "Ні",
+      "AcademicDetails": {
+        "Faculty": "Факультет комп'ютерних наук та кібернетики",
+        "Department": "Математична інформатика",
+        "Course": 4
       }
-    },
-    {
-      "PersonalInformation": {
-        "FullName": "Сидоренко Василь Петрович",
-        "DormitoryNumber": 16,
-        "Floor": 6,
-        "RoomNumber": "604/2",
-        "ContractEndDate": "2024-06-30",
-        "IsResidingInDormitory": "Так",
-        "AcademicDetails": {
-          "Faculty": "Факультет комп'ютерних наук та кібернетики",
-          "Department": "Прикладна статистика",
-          "Course": 1
-        }
+    }
+  },
+  {
+    "PersonalInformation": {
+      "FullName": "Сидоренко Василь Петрович",
+      "DormitoryNumber": 16,
+      "Floor": 6,
+      "RoomNumber": "604/2",
+      "ContractEndDate": "2024-06-30",
+      "IsResidingInDormitory": "Так",
+      "AcademicDetails": {
+        "Faculty": "Факультет комп'ютерних наук та кібернетики",
+        "Department": "Прикладна статистика",
+        "Course": 1
       }
-    },
+    }
+  },
   {
     "PersonalInformation": {
       "FullName": "Коваленко Олександр Сергійович",

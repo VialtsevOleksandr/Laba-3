@@ -84,12 +84,16 @@
                     <ColumnDefinition Width="Auto" />
                     <ColumnDefinition Width="Auto" />
                     <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="Auto" />
                     <ColumnDefinition Width="*" />
                 </Grid.ColumnDefinitions>
                 <Button Text="Clear" Grid.Column="1" FontFamily="Impact" FontSize="Medium" TextColor="Black" BackgroundColor="Beige" VerticalOptions="Center" Clicked="ClearButton_Clicked" />
                 <Button Text="Search" x:Name="SearchButton" IsEnabled="False" Margin="5,0,5,0" Grid.Column="2" FontFamily="Impact" FontSize="Medium" TextColor="Black" BackgroundColor="Beige" VerticalOptions="Center" Clicked="SearchButton_Clicked"/>
-                <Button Text="Save"  Margin="0,0,5,0" Grid.Column="3" FontFamily="Impact" FontSize="Medium" TextColor="Black" BackgroundColor="Beige" VerticalOptions="Center" Clicked="SaveButton_Clicked"/>
-                <Button Text="Add data" Grid.Column="4" FontFamily="Impact" FontSize="Medium" TextColor="Black" BackgroundColor="Beige" VerticalOptions="Center" Clicked="AddDataButton_Clicked" />
+                <Button Text="Add data" x:Name="AddDataButton" IsEnabled="False" Margin="0,0,5,0" Grid.Column="3" FontFamily="Impact" FontSize="Medium" TextColor="Black" BackgroundColor="Beige" VerticalOptions="Center" Clicked="AddDataButton_Clicked" />
+                <Button Text="Edit data" x:Name="EditDataButton" IsEnabled="False" Margin="0,0,5,0" Grid.Column="4" FontFamily="Impact" FontSize="Medium" TextColor="Black" BackgroundColor="Beige" VerticalOptions="Center" Clicked="EditDataButton_Clicked" />
+                <Button Text="Delete data" x:Name="DeleteDataButton" IsEnabled="False" Margin="0,0,5,0" Grid.Column="5" FontFamily="Impact" FontSize="Medium" TextColor="Black" BackgroundColor="Beige" VerticalOptions="Center" Clicked="DeleteDataButton_Clicked" />
+                <Button Text="Save" x:Name="SaveButton" IsEnabled="False" Grid.Column="6" FontFamily="Impact" FontSize="Medium" TextColor="Black" BackgroundColor="Beige" VerticalOptions="Center" Clicked="SaveButton_Clicked"/>
             </Grid>
            
         </StackLayout>

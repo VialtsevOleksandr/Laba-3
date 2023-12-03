@@ -1,16 +1,12 @@
-using Microsoft.Maui.Controls;
-using System.Collections.ObjectModel;
-using static Laba_3.MainPage;
-
 namespace Laba_3;
-
-public partial class AddData : ContentPage
+using static Laba_3.MainPage;
+public partial class EditData : ContentPage
 {
-    Dormitories dormitoryadd = new Dormitories();
-    private List<Dormitories> dormitories1;
-    public AddData(List<Dormitories> dormitories)
-    {
-        dormitories1 = dormitories;
+    private Dormitories dormitoryedit;
+    public EditData(Dormitories dormitoryToEdit)
+	{
+        this.dormitoryedit = dormitoryToEdit;
+
         InitializeComponent();
         Info.FontSize = 13;
         Info.SizeChanged += (s, e) =>
@@ -100,7 +96,7 @@ public partial class AddData : ContentPage
     {
         var entry = (Entry)sender;
         string text = entry.Text;
-        if (text.Length > 1 && text.Length <=2)
+        if (text.Length > 1 && text.Length <= 2)
         {
             if (text.StartsWith("-"))
             {
@@ -146,25 +142,24 @@ public partial class AddData : ContentPage
     }
     private async void SaveChangesButton_Clicked(object sender, EventArgs e)
     {
-        bool answer = await DisplayAlert("Підтвердіть додавання в таблицю", "Ви дійсно хочете додати ці дані в таблицю?", "Так", "Ні");
+        bool answer = await DisplayAlert("Підтвердіть редагування даннх", "Ви дійсно хочете відредагувати ці дані в таблиці?", "Так", "Ні");
         if (answer)
         {
-             dormitoryadd.PersonalInformation = new PersonalInformation(
-             FullNameEntry.IsEnabled ? (string.IsNullOrEmpty(FullNameEntry.Text) ? "-" : FullNameEntry.Text) : "-",
-             DormitoryNumberEntry.IsEnabled ? (string.IsNullOrEmpty(DormitoryNumberEntry.Text) ? -1 : int.Parse(DormitoryNumberEntry.Text)) : -1,
-             FloorEntry.IsEnabled ? (string.IsNullOrEmpty(FloorEntry.Text) ? -1 : int.Parse(FloorEntry.Text)) : -1,
-             RoomNumberEntry.IsEnabled ? (string.IsNullOrEmpty(RoomNumberEntry.Text) ? "-" : RoomNumberEntry.Text) : "-",
-             ContractEndDateEntry.IsEnabled ? (string.IsNullOrEmpty(ContractEndDateEntry.Text) ? "-" : ContractEndDateEntry.Text) : "-",
-             IsResidingInDormitoryPicker.IsEnabled ? (IsResidingInDormitoryPicker.SelectedItem == null ? "-" : IsResidingInDormitoryPicker.SelectedItem.ToString()) : "-",
-             new AcademicDetails(
-                FacultyEntry.IsEnabled ? (string.IsNullOrEmpty(FacultyEntry.Text) ? "-" : FacultyEntry.Text) : "-",
-                DepartmentEntry.IsEnabled ? (string.IsNullOrEmpty(DepartmentEntry.Text) ? "-" : DepartmentEntry.Text) : "-",
-                CoursePicker.IsEnabled ? (CoursePicker.SelectedItem == null ? -1 : int.Parse((string)CoursePicker.SelectedItem)) : -1
-            )
-              );
-            dormitories1.Add(dormitoryadd);
+            dormitoryedit.PersonalInformation = new PersonalInformation(
+            FullNameEntry.IsEnabled ? (string.IsNullOrEmpty(FullNameEntry.Text) ? dormitoryedit.PersonalInformation.FullName : FullNameEntry.Text) : dormitoryedit.PersonalInformation.FullName,
+            DormitoryNumberEntry.IsEnabled ? (string.IsNullOrEmpty(DormitoryNumberEntry.Text) ? dormitoryedit.PersonalInformation.DormitoryNumber : int.Parse(DormitoryNumberEntry.Text)) : dormitoryedit.PersonalInformation.DormitoryNumber,
+            FloorEntry.IsEnabled ? (string.IsNullOrEmpty(FloorEntry.Text) ? dormitoryedit.PersonalInformation.Floor : int.Parse(FloorEntry.Text)) : dormitoryedit.PersonalInformation.Floor,
+            RoomNumberEntry.IsEnabled ? (string.IsNullOrEmpty(RoomNumberEntry.Text) ? dormitoryedit.PersonalInformation.RoomNumber : RoomNumberEntry.Text) : dormitoryedit.PersonalInformation.RoomNumber,
+            ContractEndDateEntry.IsEnabled ? (string.IsNullOrEmpty(ContractEndDateEntry.Text) ? dormitoryedit.PersonalInformation.ContractEndDate : ContractEndDateEntry.Text) : dormitoryedit.PersonalInformation.ContractEndDate,
+            IsResidingInDormitoryPicker.IsEnabled ? (IsResidingInDormitoryPicker.SelectedItem == null ? dormitoryedit.PersonalInformation.IsResidingInDormitory : IsResidingInDormitoryPicker.SelectedItem.ToString()) : dormitoryedit.PersonalInformation.IsResidingInDormitory,
+            new AcademicDetails(
+                FacultyEntry.IsEnabled ? (string.IsNullOrEmpty(FacultyEntry.Text) ? dormitoryedit.PersonalInformation.AcademicDetails.Faculty : FacultyEntry.Text) : dormitoryedit.PersonalInformation.AcademicDetails.Faculty,
+                DepartmentEntry.IsEnabled ? (string.IsNullOrEmpty(DepartmentEntry.Text) ? dormitoryedit.PersonalInformation.AcademicDetails.Department : DepartmentEntry.Text) : dormitoryedit.PersonalInformation.AcademicDetails.Department,
+                CoursePicker.IsEnabled ? (CoursePicker.SelectedItem == null ? dormitoryedit.PersonalInformation.AcademicDetails.Course : int.Parse((string)CoursePicker.SelectedItem)) : dormitoryedit.PersonalInformation.AcademicDetails.Course
+                                )
+            );
             await Navigation.PopAsync();
-       }
+        }
     }
 
     private async void CancelChangesButton_Clicked(object sender, EventArgs e)
